@@ -26,7 +26,7 @@ class CoursePress_Hooks {
 
 		// Edit Course
 		add_filter( 'post_updated_messages', array( 'CoursePress_Admin_Edit', 'updated_messages' ) );
-		add_action( 'dbx_post_advanced', array( 'CoursePress_Admin_Edit', 'init_hooks' ) );
+		add_action( 'add_meta_boxes', array( 'CoursePress_Admin_Edit', 'init_hooks' ), 10, 2 );
 
 		// Enable TinyMCE for course pages.
 		add_filter( 'user_can_richedit', array( 'CoursePress_Admin_Edit', 'enable_tinymce' ) );
@@ -113,11 +113,6 @@ class CoursePress_Hooks {
 	}
 
 	public static function remove_css_overrides() {
-		global $pagenow, $typenow;
-
-		if ( 'course' === $typenow ) {
-			wp_dequeue_style( 'jquery-ui-datepicker' );
-			wp_dequeue_style( 'jquery-smoothness' );
-		}
+		// jQuery UI styles no longer enqueued - removed due to ClassicPress deprecation
 	}
 }

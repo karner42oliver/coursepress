@@ -38,10 +38,6 @@ class CoursePress_Helper_Editor {
 			$_wp_editor_expand = ( get_user_setting( 'editor_expand', 'on' ) === 'on' );
 		}
 
-		if ( wp_is_mobile() ) {
-			wp_enqueue_script( 'jquery-touch-punch' );
-		}
-
 		/** This filter is documented in wp-includes/class-wp-editor.php  */
 		add_filter( 'teeny_mce_plugins', array( __CLASS__, 'teeny_mce_plugins' ) );
 

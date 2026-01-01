@@ -179,13 +179,9 @@ class CoursePress_Admin_Controller_Menu {
 			if ( $include_core ) {
 				// Load coursepress core scripts
 				$course_dependencies = array(
-					'jquery-ui-accordion',
-					'jquery-effects-highlight',
-					'jquery-effects-core',
-					'jquery-ui-datepicker',
-					'jquery-ui-spinner',
-					'jquery-ui-droppable',
-				);
+				'jquery',
+				'backbone',
+			);
 
 				if ( isset( $this->scripts['jquery-select2'] ) ) {
 					$course_dependencies[] = 'jquery-select2';

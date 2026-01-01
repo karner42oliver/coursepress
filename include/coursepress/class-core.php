@@ -50,6 +50,10 @@ class CoursePress_Core {
 
 		CoursePress_Hooks::init();
 
+		// Remove deprecated jQuery UI and jQuery Effects from ClassicPress 3.0 compatibility
+		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'remove_deprecated_jquery_modules' ), 999 );
+		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'remove_deprecated_jquery_modules' ), 999 );
+
 		// Initialize Plugin Integrations.
 		CoursePress_Helper_Integration::init();
 
@@ -624,6 +628,36 @@ class CoursePress_Core {
 
 		} catch( Exception $e ) {
 			// Do nothing
+		}
+	}
+
+	/**
+	 * Remove deprecated jQuery UI and jQuery Effects modules for ClassicPress 3.0 compatibility.
+	 * These modules will be removed in ClassicPress 3.0.0, so we dequeue them to prevent deprecation warnings.
+	 * CoursePress uses modern alternatives (SortableJS, HTML5 APIs, etc.) instead.
+	 *
+	 * @since 2.4.1
+	 * @return void
+	 */
+	public static function remove_deprecated_jquery_modules() {
+		// List of deprecated jQuery UI and jQuery Effects modules to remove
+		$deprecated_scripts = array(
+			'jquery-ui-core',
+			'jquery-ui-mouse',
+			'jquery-ui-sortable',
+			'jquery-ui-accordion',
+			'jquery-ui-datepicker',
+			'jquery-ui-spinner',
+			'jquery-ui-droppable',
+			'jquery-ui-draggable',
+			'jquery-effects-core',
+			'jquery-effects-highlight',
+			'jquery-touch-punch',
+		);
+
+		// Dequeue all deprecated modules
+		foreach ( $deprecated_scripts as $script_handle ) {
+			wp_dequeue_script( $script_handle );
 		}
 	}
 }

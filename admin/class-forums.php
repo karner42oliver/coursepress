@@ -41,9 +41,6 @@ class CoursePress_Admin_Forums extends CoursePress_Admin_Controller_Menu {
 			}
 		}
 		wp_reset_vars( array( 'action' ) );
-		if ( wp_is_mobile() ) {
-			wp_enqueue_script( 'jquery-touch-punch' );
-		}
 		include_once ABSPATH.'/wp-admin/includes/meta-boxes.php';
 		wp_enqueue_script( 'post' );
 		self::init();

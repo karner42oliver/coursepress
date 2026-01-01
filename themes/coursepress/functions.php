@@ -254,26 +254,11 @@ if ( ! function_exists( 'load_all_jquery' ) ) :
 
 	function load_all_jquery() {
 		wp_enqueue_script( 'jquery' );
-		$jquery_ui = array(
-			'jquery-ui-core',
-			'jquery-ui-widget',
-			'jquery-ui-mouse',
-			'jquery-ui-accordion',
-			'jquery-ui-slider',
-			'jquery-ui-tabs',
-			'jquery-ui-sortable',
-			'jquery-ui-draggable',
-			'jquery-ui-droppable',
-			'jquery-ui-selectable',
-			'jquery-ui-position',
-			'jquery-ui-datepicker',
-			'jquery-ui-resizable',
-			'jquery-ui-dialog',
-			'jquery-ui-button',
-		);
-		foreach ( $jquery_ui as $script ) {
-			wp_enqueue_script( $script );
-		}
+		// jQuery UI modules have been completely removed due to ClassicPress 2.2.0+ deprecation
+		// and planned removal in ClassicPress 3.0.0
+		// Using modern alternatives instead:
+		// - HTML5 <input type="datetime-local"> for date/time pickers
+		// - SortableJS for drag-and-drop functionality
 	}
 endif;
 

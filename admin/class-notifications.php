@@ -28,9 +28,6 @@ class CoursePress_Admin_Notifications extends CoursePress_Admin_Controller_Menu 
 			wp_die( __( 'Sorry, you are not allowed to access this page.' ), 403 );
 		}
 		wp_reset_vars( array( 'action' ) );
-		if ( wp_is_mobile() ) {
-			wp_enqueue_script( 'jquery-touch-punch' );
-		}
 		include_once ABSPATH.'/wp-admin/includes/meta-boxes.php';
 		wp_enqueue_script( 'post' );
 		self::init();

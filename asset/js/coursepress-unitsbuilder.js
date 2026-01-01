@@ -56,7 +56,11 @@ var CoursePress = CoursePress || {};
 			axis: 'y',
 			handle: 'h3',
 			stop: function( event, ui ) {
-				ui.item.children( 'h3' ).triggerHandler( 'focusout', ui );
+				// With SortableJS polyfill, ui.item is handled differently
+				var item = ui && ui.item ? ui.item : event.target;
+				if ( $(item).find('h3').length > 0 ) {
+					$(item).find('h3').triggerHandler('focusout', ui);
+				}
 				var modules = $( '.module-holder' );
 				$.each( modules, function( index, module ) {
 					var current_order = parseInt( $( module ).attr( 'data-order' ) );
@@ -68,7 +72,10 @@ var CoursePress = CoursePress || {};
 						$( module ).addClass( 'dirty' );
 					}
 				} );
-				$( this ).accordion( 'refresh' );
+				// Trigger accordion refresh if available
+				if ( typeof $( this ).accordion === 'function' ) {
+					$( this ).accordion( 'refresh' );
+				}
 				// Fix for TinyMCE breaking after sorting the unit module.
 				var editor_tabs = this.getElementsByClassName('wp-editor-tabs');
 				$.each( editor_tabs, function( index, editor_tab ){

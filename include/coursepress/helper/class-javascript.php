@@ -102,14 +102,17 @@ class CoursePress_Helper_JavaScript {
 		/** COURSEPRESS_COURSE */
 		if ( $is_valid_page ) {
 
+			// Load SortableJS for modern drag-drop (replaces jquery-ui-sortable)
+			wp_enqueue_script( 'sortablejs', 'https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js', array(), '1.15.0', true );
+
+			// Load fallback polyfills for jQuery UI components
+			$fallback_js = CoursePress::$url . 'asset/js/jquery-ui-modern-fallback.js';
+			wp_enqueue_script( 'jquery_ui_fallback', $fallback_js, array( 'jquery', 'sortablejs' ), CoursePress::$version, true );
+
 			$coursepress_course_depends_array = array(
-				'jquery-ui-accordion',
-				'jquery-effects-highlight',
-				'jquery-effects-core',
-				'jquery-ui-datepicker',
-				'jquery-ui-spinner',
-				'jquery-ui-droppable',
+				'jquery',
 				'backbone',
+				'jquery_ui_fallback', // Must be loaded BEFORE coursepress_course.js
 			);
 
 			if ( apply_filters( 'coursepress_use_select2_student_selector', true ) ) {
@@ -173,12 +176,13 @@ class CoursePress_Helper_JavaScript {
 			}
 		}
 
-		$style_global = CoursePress::$url . 'asset/css/admin-global.css';
-		$timepicker_css = CoursePress::$url . 'asset/css/external/jquery-ui-timepicker-addon.min.css';
-		$timepicker_js = CoursePress::$url . 'asset/js/external/jquery-ui-timepicker-addon.min.js';
-		wp_enqueue_style( 'coursepress_admin_timepicker', $timepicker_css, false, CoursePress::$version );
-		wp_enqueue_script( 'coursepress_admin_timepicker', $timepicker_js, array( 'jquery-ui-slider', 'jquery-ui-datepicker' ), CoursePress::$version, true );
-		wp_enqueue_style( 'coursepress_admin_global', $style_global, array( 'jquery-datepicker' ), CoursePress::$version );
+		// Timepicker removed - using HTML5 datetime-local input instead
+		// $style_global = CoursePress::$url . 'asset/css/admin-global.css';
+		// $timepicker_css = CoursePress::$url . 'asset/css/external/jquery-ui-timepicker-addon.min.css';
+		// $timepicker_js = CoursePress::$url . 'asset/js/external/jquery-ui-timepicker-addon.min.js';
+		// wp_enqueue_style( 'coursepress_admin_timepicker', $timepicker_css, false, CoursePress::$version );
+		// wp_enqueue_script( 'coursepress_admin_timepicker', $timepicker_js, array( 'jquery-ui-slider', 'jquery-ui-datepicker' ), CoursePress::$version, true );
+		// wp_enqueue_style( 'coursepress_admin_global', $style_global, array( 'jquery-datepicker' ), CoursePress::$version );
 
 		/** COURSEPRESS_COURSE|UNIT BUILDER */
 		if ( 'coursepress_course' == $_GET['page'] && isset( $_GET['tab'] ) && 'units' == $_GET['tab'] ) {
@@ -223,12 +227,7 @@ class CoursePress_Helper_JavaScript {
 		if ( 'coursepress_course' === $_GET['page'] && 'edit.php' == $pagenow && 'edit-course' == $screen->id ) {
 			$script = CoursePress::$url . 'asset/js/coursepress-courselist.js';
 			wp_enqueue_script( 'coursepress_course_list', $script, array(
-				'jquery-ui-accordion',
-				'jquery-effects-highlight',
-				'jquery-effects-core',
-				'jquery-ui-datepicker',
-				'jquery-ui-spinner',
-				'jquery-ui-droppable',
+				'jquery',
 				'backbone',
 			), CoursePress::$version );
 
@@ -558,7 +557,6 @@ class CoursePress_Helper_JavaScript {
 			$script,
 			array(
 				'jquery',
-				'jquery-ui-dialog',
 				'underscore',
 				'backbone',
 			),

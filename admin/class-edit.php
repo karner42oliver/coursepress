@@ -49,12 +49,25 @@ if ( ! class_exists( 'CoursePress_Admin_Edit' ) ) :
 		 **/
 		static $post_type = 'course';
 
-		public static function init_hooks( $post ) {
+		public static function init_hooks( $post_type, $post = null ) {
+			// Support both dbx_post_advanced (old, deprecated) and add_meta_boxes (new) hook signatures
+			// If called from add_meta_boxes: $post_type is string, $post is WP_Post
+			// If called from old code: only first param is provided as WP_Post
+			if ( is_object( $post_type ) && ! $post ) {
+				$post = $post_type;
+			} elseif ( is_string( $post_type ) && ! $post ) {
+				global $post;
+			}
+
+			if ( ! $post ) {
+				return;
+			}
+
 			self::$data_course = new CoursePress_Data_Course();
 
-			self::$post_type = $post_type = self::$data_course->get_post_type_name();
+			self::$post_type = $post_type_name = self::$data_course->get_post_type_name();
 
-			if ( $post->post_type != $post_type ) {
+			if ( $post->post_type != $post_type_name ) {
 				return;
 			}
 
@@ -384,12 +397,7 @@ if ( ! class_exists( 'CoursePress_Admin_Edit' ) ) :
 				$_wp_editor_expand = ( get_user_setting( 'editor_expand', 'on' ) === 'on' );
 			}
 
-			if ( wp_is_mobile() ) {
-				wp_enqueue_script( 'jquery-touch-punch' );
-			}
 
-			/** This filter is documented in wp-includes/class-wp-editor.php  */
-			//add_filter( 'teeny_mce_plugins', array( __CLASS__, 'teeny_mce_plugins' ) );
 
 			$defaults = array(
 				'_content_editor_dfw' => $_content_editor_dfw,
