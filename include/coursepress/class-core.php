@@ -636,7 +636,7 @@ class CoursePress_Core {
 	 * These modules will be removed in ClassicPress 3.0.0, so we dequeue them to prevent deprecation warnings.
 	 * CoursePress uses modern alternatives (SortableJS, HTML5 APIs, etc.) instead.
 	 *
-	 * @since 2.4.1
+	 * @since 1.0.0
 	 * @return void
 	 */
 	public static function remove_deprecated_jquery_modules() {

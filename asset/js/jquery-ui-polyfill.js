@@ -5,7 +5,7 @@
  * or removed in newer versions of ClassicPress.
  * 
  * @package CoursePress
- * @since 2.4.1
+ * @since 1.0.0
  */
 
 ( function( $ ) {

@@ -11,7 +11,7 @@
  * - droppable() with HTML5 drag-drop API
  * 
  * @package CoursePress
- * @since 2.4.1
+ * @since 1.0.0
  */
 
 (function( $ ) {

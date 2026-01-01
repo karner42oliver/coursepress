@@ -1,10 +1,10 @@
 <?php
 /**
  * Plugin Name: CoursePress
- * Version:     2.4.1
+ * Version:     1.0.0
  * Description: CoursePress vereinfacht die Online-Ausbildung mit Kursseiten, Paywalls, Social Sharing und einer interaktiven Lernumgebung, mit der mehr Schüler miteinander verbunden werden können.
  * Author:      PSOURCE
- * Author URI:  https://github.com/cp-psource
+ * Author URI:  https://github.com/Power-Source
  * Plugin URI:  https://cp-psource.github.io/coursepress/
  * License:     GPL2
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -16,7 +16,7 @@
 /**
  * Copyright notice.
  *
- * @copyright PSOURCE (https://github.com/cp-psource)
+ * @copyright PSOURCE (https://github.com/Power-Source)
  *
  * Authors: PSOURCE
  * Contributors: DerN3rd (PSOURCE) 
@@ -97,7 +97,7 @@ class CoursePress {
 	 *
 	 * @var string
 	 */
-	public static $version = '2.4.1';
+	public static $version = '1.0.0';
 
 	/**
 	 * Plugin name, this reflects the Pro/Standard version.
@@ -310,7 +310,7 @@ class CoursePress {
 	/**
 	 * Redirect to CoursePress setup page after activation.
 	 *
-	 * @since 2.4.1
+	 * @since 1.0.0
 	 */
 	public static function redirect_to_setup_page() {
 		// Check if this is an admin page and the coursepress_activate option is set

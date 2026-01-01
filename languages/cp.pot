@@ -9527,5 +9527,5 @@ msgid "PSOURCE"
 msgstr ""
 
 #. Author URI of the plugin/theme
-msgid "https://github.com/cp-psource"
+msgid "https://github.com/Power-Source"
 msgstr ""

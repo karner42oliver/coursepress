@@ -18,7 +18,7 @@ class CoursePress_Helper_Extension_MarketPress {
 	}
 
 	public static function add_to_extensions_list( $plugins ) {
-		$download_source = 'https://github.com/cp-psource/marketpress/releases/latest';
+		$download_source = 'https://github.com/Power-Source/marketpress/releases/latest';
 		$external_url = 'https://cp-psource.github.io/coursepress/';
 		$source_message = 'GitHub';
 		$is_link = true;
